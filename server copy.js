@@ -111,6 +111,7 @@ app.get('/weather', async (req, res) => {
     res.send('Error fetching weather data');
   }
   });
+
   */
 // New index page
 app.get('/', function(req, res) {
