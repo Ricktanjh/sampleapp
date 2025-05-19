@@ -118,19 +118,19 @@ app.get('/', function(req, res) {
 });
 
 // New moodtracker page
-app.get('/', function(req, res) {
+app.get('/moodtracker', function(req, res) {
     res.render('pages/moodtracker');
 });
 // New video page
-app.get('/', function(req, res) {
+app.get('/video', function(req, res) {
     res.render('pages/video');
 });
 // New support page
-app.get('/', function(req, res) {
+app.get('/support', function(req, res) {
     res.render('pages/support');
 });
 // New toolkits page
-app.get('/', function(req, res) {
+app.get('/toolkits', function(req, res) {
     res.render('pages/toolkits');
 });
 
