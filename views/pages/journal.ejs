@@ -12,15 +12,15 @@
       background: #f5f5f5;
     }
     header {
-     display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(90deg, #7b2ff7, #f107a3);
-            color: white;
-            padding: 30px 20px;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, #7b2ff7, #f107a3);
+      color: white;
+      padding: 30px 20px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .logo span {
       color: #66f0ff;
@@ -45,41 +45,10 @@
       font-weight: 600;
       margin-bottom: 10px;
     }
-    .moods {
-      display: flex;
-      justify-content: space-around;
-      margin: 15px 0;
-    }
-    .mood {
-      padding: 10px;
-      border-radius: 50%;
-      background: #f0f0f0;
-      cursor: pointer;
-      text-align: center;
-    }
-    .mood.active {
-      background: #66f0ff;
-      color: white;
-    }
-    .intensity {
-      display: flex;
-      justify-content: center;
-      margin: 15px 0;
-    }
-    .intensity button {
-      background: none;
-      border: 2px solid #ccc;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      margin: 0 5px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .intensity button.active {
-      background: #f107a3;
-      color: white;
-      border: none;
+    .post-container {
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      margin-top: 10px;
     }
     textarea {
       width: 100%;
@@ -99,6 +68,15 @@
       border-radius: 10px;
       cursor: pointer;
     }
+    .delete-button {
+      background: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -112,23 +90,41 @@
   </header>
 
   <main>
-
-
+    <!-- Journal Entry Form -->
     <div class="log-mood-form">
       <h2 class="section-title">Log Your Journal</h2>
       <p>How are you vibing today?</p>
-    
-      <textarea placeholder="Describe what's happening in your day..."></textarea>
-
-      <div style="text-align: center;">
-        <button class="save-mood">Save Journal Entry</button>
-      </div>
+      
+      <form action="/new" method="POST">
+        <textarea name="content" placeholder="Describe what's happening in your day..."></textarea>
+        <div style="text-align: center;">
+          <button class="save-mood" type="submit">Save Journal Entry</button>
+        </div>
+      </form>
     </div>
 
+    <!-- Journal Entries Display -->
+    <div class="mood-tracker">
+      <h2 class="section-title">Previous Entries</h2>
+      <% if (blogs && blogs.length > 0) { %>
+        <% blogs.forEach(post => { %>
+          <article class="post-container">
+            <h4><%= post.title || 'Untitled Entry' %></h4>
+            <p><%= post.content %></p>
+            <form action="/delete/<%= post.id %>" method="POST" onsubmit="return confirm('Delete this entry?');">
+              <button class="delete-button" type="submit">Delete</button>
+            </form>
+          </article>
+        <% }) %>
+      <% } else { %>
+        <p>No entries yet. Start by logging your first journal!</p>
+      <% } %>
+    </div>
+
+    <!-- Static Recommendations Section -->
     <div class="mood-insights">
       <h2 class="section-title">Mood Insights</h2>
       <p><strong>Recommendations</strong></p>
- 
       <ul>
         <li>🧘‍♂️ Try deep breathing exercises</li>
         <li>📓 Evening journaling before sleep</li>
@@ -136,13 +132,11 @@
       </ul>
     </div>
   </main>
-  
-<footer style="background: linear-gradient(90deg, #7b2ff7, #f107a3); color: white; padding: 30px 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; font-size: 1em; text-align: center;">
-  <p style="max-width: 700px; margin: auto;">
-    A mental wellness platform designed for Singaporean teenagers to manage academic stress through mood tracking, journaling, self-help resources, and educational content.
-  </p>
-</footer>
 
-  
+  <footer style="background: linear-gradient(90deg, #7b2ff7, #f107a3); color: white; padding: 30px 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; font-size: 1em; text-align: center;">
+    <p style="max-width: 700px; margin: auto;">
+      A mental wellness platform designed for Singaporean teenagers to manage academic stress through mood tracking, journaling, self-help resources, and educational content.
+    </p>
+  </footer>
 </body>
 </html>

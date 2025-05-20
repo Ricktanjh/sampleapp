@@ -2,9 +2,9 @@
 require("dotenv").config();
 
 // Needed for Express
-var express = require('express')
-var app = express()
-var axios = require('axios');
+const express = require('express');
+const app = express();
+const axios = require('axios');
 
 // Needed for EJS
 app.set('view engine', 'ejs');
@@ -14,131 +14,103 @@ app.use(express.static(__dirname + '/public'));
 
 // Needed for parsing form data
 app.use(express.json());       
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // Needed for Prisma to connect to database
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-/*
-// Main landing page
-app.get('/', async function(req, res) {
 
-    // Try-Catch for any errors
-    try {
-        // Get all blog posts
-        const blogs = await prisma.post.findMany({
-                orderBy: [
-                  {
-                    id: 'desc'
-                  }
-                ]
-        });
 
-        // Render the homepage with all the blog posts
-        await res.render('pages/home', { blogs: blogs });
-      } catch (error) {
-        res.render('pages/home');
-        console.log(error);
-      } 
-});
+// ---------------------- ROUTES ----------------------
 
-// About page
-app.get('/about', function(req, res) {
-    res.render('pages/about');
-});
-
-// New post page
-app.get('/new', function(req, res) {
-    res.render('pages/new');
-});
-
-// Create a new post
-app.post('/new', async function(req, res) {
-    
-    // Try-Catch for any errors
-    try {
-        // Get the title and content from submitted form
-        const { title, content } = req.body;
-
-        // Reload page if empty title or content
-        if (!title || !content) {
-            console.log("Unable to create new post, no title or content");
-            res.render('pages/new');
-        } else {
-            // Create post and store in database
-            const blog = await prisma.post.create({
-                data: { title, content },
-            });
-
-            // Redirect back to the homepage
-            res.redirect('/');
-        }
-      } catch (error) {
-        console.log(error);
-        res.render('pages/new');
-      }
-
-});
-
-// Delete a post by id
-app.post("/delete/:id", async (req, res) => {
-    const { id } = req.params;
-    
-    try {
-        await prisma.post.delete({
-            where: { id: parseInt(id) },
-        });
-      
-        // Redirect back to the homepage
-        res.redirect('/');
-    } catch (error) {
-        console.log(error);
-        res.redirect('/');
-    }
-  });
-
-  app.get('/demo', function(req, res) {
-  res.render('pages/demo');
-});
-
-// add this snippet before 
-app.get('/weather', async (req, res) => {
-  try {
-    const response = await axios.get('https://api-open.data.gov.sg/v2/real-time/api/twenty-four-hr-forecast');
-    res.render('pages/weather', { weather: response.data });
-  } catch (error) {
-    console.error(error);
-    res.send('Error fetching weather data');
-  }
-  });
-  */
-// New index page
+// Landing Page (static)
 app.get('/', function(req, res) {
     res.render('pages/index');
 });
 
-// New moodtracker page
+// Mood Tracker Page
 app.get('/moodtracker', function(req, res) {
     res.render('pages/moodtracker');
 });
-// New video page
+
+// Video Page
 app.get('/video', function(req, res) {
     res.render('pages/video');
 });
-// New support page
+
+// Support Page
 app.get('/support', function(req, res) {
     res.render('pages/support');
 });
-// New toolkits page
+
+// Toolkits Page
 app.get('/toolkits', function(req, res) {
     res.render('pages/toolkits');
 });
 
-// New Journal page
-app.get('/journal', function(req, res) {
-    res.render('pages/journal');
+// Journal Page (dynamic - fetches from DB)
+app.get('/journal', async function(req, res) {
+    try {
+        const blogs = await prisma.post.findMany({
+            orderBy: [{ id: 'desc' }]
+        });
+        res.render('pages/journal', { blogs });
+    } catch (error) {
+        console.error(error);
+        res.render('pages/journal', { blogs: [] }); // fallback
+    }
+});
+
+// Handle form submission from journal.ejs
+app.post('/new', async function(req, res) {
+    try {
+        const { content } = req.body;
+        const title = new Date().toLocaleDateString(); // default title
+
+        if (!content) {
+            console.log("Content missing in journal entry");
+            return res.redirect('/journal');
+        }
+
+        await prisma.post.create({
+            data: { title, content }
+        });
+
+        res.redirect('/journal');
+    } catch (error) {
+        console.error(error);
+        res.redirect('/journal');
+    }
+});
+
+// Delete a journal entry by ID
+app.post('/delete/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        await prisma.post.delete({
+            where: { id: parseInt(id) }
+        });
+        res.redirect('/journal');
+    } catch (error) {
+        console.error(error);
+        res.redirect('/journal');
+    }
+});
+
+// Optional: Weather Page (static or dynamic)
+app.get('/weather', async (req, res) => {
+    try {
+        const response = await axios.get('https://api-open.data.gov.sg/v2/real-time/api/twenty-four-hr-forecast');
+        res.render('pages/weather', { weather: response.data });
+    } catch (error) {
+        console.error(error);
+        res.send('Error fetching weather data');
+    }
 });
 
 
-// Tells the app which port to run on
-app.listen(8080);
+// ---------------------- START SERVER ----------------------
+app.listen(8080, () => {
+    console.log("Server running on http://localhost:8080");
+});
