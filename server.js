@@ -134,6 +134,10 @@ app.get('/toolkits', function(req, res) {
     res.render('pages/toolkits');
 });
 
+// New Journal page
+app.get('/journal', function(req, res) {
+    res.render('pages/journal');
+});
 
 
 // Tells the app which port to run on

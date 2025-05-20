@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Rick Tan",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.7.0",
