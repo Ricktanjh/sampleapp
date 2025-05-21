@@ -1,37 +1,145 @@
-.welcome-container {
-    text-align: center;
-
-    margin-top: 50px;
-    margin-bottom: 50px;
+/* === Styles from index.ejs === */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f5f5f5;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #7b2ff7, #f107a3);
+  color: white;
+  padding: 30px 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.logo span {
+  color: #66f0ff;
+}
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+main {
+  padding: 20px;
+}
+.mood-check {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.moods {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+.mood {
+  padding: 15px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  cursor: pointer;
+  text-align: center;
+}
+.mood.active {
+  background: #66f0ff;
+  color: white;
+}
+.tools {
+  margin-top: 30px;
+}
+.tool-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.new-post-btn-container{
-    text-align: center;
-
-    margin-top: 50px;
-    margin-bottom: 50px;
+/* === Styles from moodtracker.ejs === */
+.mood-tracker, .log-mood-form, .mood-insights {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+.section-title {
+  color: #7b2ff7;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+ul {
+  padding-left: 20px;
+}
+.intensity {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+.intensity button {
+  background: none;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.intensity button.active {
+  background: #f107a3;
+  color: white;
+  border: none;
+}
+textarea {
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+button.save-mood {
+  margin-top: 20px;
+  background: linear-gradient(90deg, #7b2ff7, #f107a3);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-.post-container {
-    max-width: 800px;
-
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
+/* === Added button style === */
+button.log-mood {
+  background: linear-gradient(90deg, #7b2ff7, #f107a3);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-.about-container {
-    text-align: center;
-
-    margin-top: 50px;
-    margin-bottom: 50px;
+/* === Added for Grid to be tiled  === */
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
 }
 
-.about-container > img{
-    margin-bottom: 40px;
-}
-
-.cancel-create-post {
-    text-align: center;
+.support-card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

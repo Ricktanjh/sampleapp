@@ -4,11 +4,61 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mood Tracker - VibingSG</title>
-  <link rel="stylesheet" href="/css/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, #7b2ff7, #f107a3);
+      color: white;
+      padding: 30px 20px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .logo span {
+      color: #66f0ff;
+    }
+    nav a {
+      color: white;
+      margin-left: 15px;
+      text-decoration: none;
+    }
+    main {
+      padding: 20px;
+    }
+    .mood-tracker, .log-mood-form, .mood-insights {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .section-title {
+      color: #7b2ff7;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
 </head>
 <body>
-  <%- include('../partials/header') %>
+  <header>
+    <div class="logo" style="font-size: 1.8em;">Vibing<span>SG</span></div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/toolkits">Resources</a>
+      <a href="/support">Helpline</a>
+    </nav>
+  </header>
 
   <main>
     <div class="log-mood-form">
@@ -35,7 +85,11 @@
     </div>
   </main>
 
-  <%- include('../partials/footer') %>
+  <footer style="background: linear-gradient(90deg, #7b2ff7, #f107a3); color: white; padding: 30px 20px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; font-size: 1em; text-align: center;">
+    <p style="max-width: 700px; margin: auto;">
+      A mental wellness platform designed for Singaporean teenagers to manage academic stress through mood tracking, journaling, self-help resources, and educational content.
+    </p>
+  </footer>
 
   <script>
     const labels = <%- JSON.stringify(logs.map(log => new Date(log.createdAt).toLocaleDateString())) %>;
