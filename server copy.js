@@ -28,9 +28,10 @@ app.get('/', function(req, res) {
     res.render('pages/index');
 });
 
-// Mood Tracker Page
+// Mood Tracker Page (receives mood from index.html)
 app.get('/moodtracker', function(req, res) {
-    res.render('pages/moodtracker');
+  const mood = req.query.mood || 'Neutral'; // fallback to Neutral
+  res.render('pages/moodtracker', { mood }); // send mood to EJS
 });
 
 // Video Page

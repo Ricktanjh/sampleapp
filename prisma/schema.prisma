@@ -19,3 +19,11 @@ model Post {
   title     String
   content   String
 }
+
+model MoodLog {
+  id        Int      @id @default(autoincrement())
+  mood      String
+  createdAt DateTime @default(now())
+
+  @@map("moodlog")
+}

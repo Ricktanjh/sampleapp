@@ -86,23 +86,16 @@
     <section class="mood-check">
       <h2 style="color: #7b2ff7;">Quick Mood Check</h2>
       <p>How are you vibing today?</p>
-
-      <form id="moodForm" action="/logmood" method="POST">
-        <div class="moods">
-          <div class="mood" data-mood="Happy">Happy</div>
-          <div class="mood active" data-mood="Calm">Calm</div>
-          <div class="mood" data-mood="Neutral">Neutral</div>
-          <div class="mood" data-mood="Anxious">Anxious</div>
-          <div class="mood" data-mood="Stressed">Stressed</div>
-        </div>
-
-        <!-- Hidden input to carry selected mood -->
-        <input type="hidden" name="mood" id="moodInput" value="Calm" />
-
-        <div style="text-align:center; margin-top:20px;">
-          <button type="submit" class="log-mood" style="background: linear-gradient(90deg, #7b2ff7, #f107a3); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">Log My Mood</button>
-        </div>
-      </form>
+      <div class="moods">
+        <div class="mood" data-mood="Happy">Happy</div>
+        <div class="mood active" data-mood="Calm">Calm</div>
+        <div class="mood" data-mood="Neutral">Neutral</div>
+        <div class="mood" data-mood="Anxious">Anxious</div>
+        <div class="mood" data-mood="Stressed">Stressed</div>
+      </div>
+      <div style="text-align:center; margin-top:20px;">
+        <button class="log-mood" onclick="logMood()" style="background: linear-gradient(90deg, #7b2ff7, #f107a3); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;">Log My Mood</button>
+      </div>
     </section>
 
     <!-- Tools Section -->
@@ -145,16 +138,20 @@
     <p style="max-width: 700px; margin: auto;">A mental wellness web application designed for Singaporean teenagers to manage academic stress through mood tracking, journaling, self-help resources, and educational content.</p>
   </footer>
 
+  <!-- JS for mood selection and redirect -->
   <script>
+    function logMood() {
+      const selected = document.querySelector('.mood.active');
+      const mood = selected ? selected.dataset.mood : 'Neutral';
+      window.location.href = `/moodtracker?mood=${encodeURIComponent(mood)}`;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       const moods = document.querySelectorAll('.mood');
-      const moodInput = document.getElementById('moodInput');
-
       moods.forEach(mood => {
         mood.addEventListener('click', () => {
           moods.forEach(m => m.classList.remove('active'));
           mood.classList.add('active');
-          moodInput.value = mood.dataset.mood;
         });
       });
     });
