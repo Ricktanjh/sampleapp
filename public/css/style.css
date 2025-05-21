@@ -119,6 +119,13 @@ button.save-mood {
   cursor: pointer;
 }
 
+.nav-user {
+  color: #f4f6f8;
+  font-size: larger;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
 /* === Added button style === */
 button.log-mood {
   background: linear-gradient(90deg, #7b2ff7, #f107a3);
