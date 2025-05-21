@@ -12,18 +12,30 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
-// Post model represents individual blog posts
-model Post {
+model User {
   id        Int       @id @default(autoincrement())
-  title     String
-  content   String
+  username  String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  moodLogs  MoodLog[]
+  posts     Post[]
 }
 
 model MoodLog {
   id        Int      @id @default(autoincrement())
   mood      String
   createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
 
-  @@map("moodlog")
+
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
