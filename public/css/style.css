@@ -267,3 +267,15 @@ button.log-mood {
   font-weight: bold;
   text-decoration: none;
 }
+
+/* === Updated styles for mood recommendation === */
+.recommendation-list li a {
+  text-decoration: none;       /* Removes underline */
+  color: #7b2ff7;              /* Branded purple color */
+  font-weight: 500;            /* Slight emphasis */
+  transition: color 0.3s ease;
+}
+
+.recommendation-list li a:hover {
+  color: #a26bfa;              /* Lighter shade on hover */
+}

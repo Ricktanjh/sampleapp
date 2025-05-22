@@ -50,18 +50,19 @@
   %>
 
   <% if (score >= 3) { %>
-    <ul>
-      <li>🚀 <a href="/video">Fuel your positivity with an uplifting video</a></li>
-    <li>⏳ <a href="/toolkits">Channel your energy using the Pomodoro timer</a></li>
-    <li>🖊️ <a href="/journal">Capture this vibe in your journal — future you will thank you</a></li>
-    </ul>
-  <% } else { %>
-    <ul>
-    <li>🌬️ <a href="/toolkits">Take a few calming breaths with our breathing tools</a></li>
-    <li>📝 <a href="/journal">Let it out — your journal is a safe space</a></li>
-    <li>💬 <a href="/support">You’re not alone — reach out through our support helpline</a></li>
-    </ul>
-  <% } %>
+  <ul class="recommendation-list">
+    <li>🚀 Feeling great? <a href="/video">Watch a motivational video</a> to keep the momentum going.</li>
+    <li>⏳ Stay focused with the <a href="/toolkits">Pomodoro timer</a>.</li>
+    <li>🖊️ <a href="/journal">Capture your thoughts</a> and wins in your journal.</li>
+  </ul>
+<% } else { %>
+  <ul class="recommendation-list">
+    <li>🌬️ Take a breath — <a href="/toolkits">try our calming tools</a>.</li>
+    <li>📝 <a href="/journal">Journal what you’re feeling</a> — it can help clear your mind.</li>
+    <li>💬 <a href="/support">Reach out to our helpline</a> — someone’s always here to listen.</li>
+  </ul>
+<% } %>
+
 </div>
 
 
