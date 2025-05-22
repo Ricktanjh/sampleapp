@@ -37,9 +37,9 @@
         <article class="card">
           <h3><%= post.title %></h3>
           <p><%= post.content %></p>
-          <form action="/delete/<%= post.id %>" method="POST" onsubmit="return confirm('Do you really want to delete this post?');">
-            <button type="submit" class="log-mood">Delete</button>
-          </form>
+          <form action="/journal/<%= post.id %>/delete" method="POST" onsubmit="return confirm('Do you really want to delete this post?');">
+  <button type="submit" class="log-mood">Delete</button>
+</form>
         </article>
       <% }); %>
     <% } else { %>
