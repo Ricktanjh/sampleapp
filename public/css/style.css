@@ -119,12 +119,32 @@ button.save-mood {
   cursor: pointer;
 }
 
+/* === Added Displayed Name Style at Banner === */
 .nav-user {
   color: #f4f6f8;
   font-size: larger;
   font-weight: 600;
   margin-bottom: 10px;
 }
+
+/* === Added form style for Login and Register === */
+.form-group {
+      margin-bottom: 15px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    form input[type="text"],
+    form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
 
 /* === Added button style === */
 button.log-mood {
