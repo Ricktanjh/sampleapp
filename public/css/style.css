@@ -35,15 +35,28 @@ main {
 }
 .moods {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px; /* or try 20px for more space */
   margin: 20px 0;
 }
 .mood {
-  padding: 15px;
+  flex: 0 1 calc(33.333% - 20px); /* auto wrap */
+  max-width: 100px;
+  height: 100px; /* make it square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 50%;
   background: #f0f0f0;
   cursor: pointer;
   text-align: center;
+  font-weight: 500;
+}
+@media (min-width: 600px) {
+  .mood {
+    flex: 0 1 calc(20% - 20px);
+  }
 }
 .mood.active {
   background: #66f0ff;
@@ -129,22 +142,21 @@ button.save-mood {
 
 /* === Added form style for Login and Register === */
 .form-group {
-      margin-bottom: 15px;
-    }
-    form label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 500;
-    }
-    form input[type="text"],
-    form input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-
+  margin-bottom: 15px;
+}
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+form input[type="text"],
+form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
 
 /* === Added button style === */
 button.log-mood {
@@ -173,85 +185,85 @@ button.log-mood {
 
 /* === Updated styles for toolkit grid: 3 cards per row === */
 .toolkits-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 20px;
-    }
-    .toolkits-card {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      display: flex;
-      flex-direction: column;
-    }
-    .toolkits-thumb {
-      width: 100%;
-      height: auto;
-    }
-    .toolkits-content {
-      padding: 15px;
-    }
-    .toolkits-title {
-      font-weight: bold;
-      color: #7b2ff7;
-      margin-bottom: 5px;
-    }
-    .toolkits-desc {
-      color: #555;
-      font-size: 0.9em;
-      margin-bottom: 10px;
-    }
-    .watch-link {
-      color: #7b2ff7;
-      font-weight: bold;
-      text-decoration: none;
-    }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 20px;
+}
+.toolkits-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+.toolkits-thumb {
+  width: 100%;
+  height: auto;
+}
+.toolkits-content {
+  padding: 15px;
+}
+.toolkits-title {
+  font-weight: bold;
+  color: #7b2ff7;
+  margin-bottom: 5px;
+}
+.toolkits-desc {
+  color: #555;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+.watch-link {
+  color: #7b2ff7;
+  font-weight: bold;
+  text-decoration: none;
+}
 
-    /* === Updated styles for video grid: 3 cards per row === */
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    .video-card {
-      background: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .video-thumb {
-      width: 100%;
-      height: 180px;
-      background: #ddd;
-      position: relative;
-    }
-    .video-thumb::after {
-      content: '\25B6';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 2em;
-      color: white;
-      background: rgba(0,0,0,0.6);
-      padding: 10px;
-      border-radius: 50%;
-    }
-    .video-content {
-      padding: 15px;
-    }
-    .video-title {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .video-desc {
-      color: #555;
-      font-size: 0.9em;
-      margin-bottom: 10px;
-    }
-    .watch-link {
-      color: #7b2ff7;
-      font-weight: bold;
-      text-decoration: none;
-    }
+/* === Updated styles for video grid: 3 cards per row === */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.video-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.video-thumb {
+  width: 100%;
+  height: 180px;
+  background: #ddd;
+  position: relative;
+}
+.video-thumb::after {
+  content: '\25B6';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  color: white;
+  background: rgba(0,0,0,0.6);
+  padding: 10px;
+  border-radius: 50%;
+}
+.video-content {
+  padding: 15px;
+}
+.video-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.video-desc {
+  color: #555;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+.watch-link {
+  color: #7b2ff7;
+  font-weight: bold;
+  text-decoration: none;
+}
