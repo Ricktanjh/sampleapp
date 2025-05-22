@@ -34,14 +34,38 @@
       <canvas id="moodChart" height="100"></canvas>
     </div>
 
-    <div class="mood-insights">
-      <h2 class="section-title">Mood Recommendations</h2>
-      <ul>
-        <li>🧘‍♂️ Try deep breathing exercises</li>
-        <li>📓 Evening journaling before sleep</li>
-        <li>⏲️ Pomodoro technique for studying</li>
-      </ul>
-    </div>
+   
+<div class="mood-insights">
+  <h2 class="section-title">Mood Recommendations</h2>
+  <% 
+    const moodScores = {
+      "Happy": 5,
+      "Calm": 4,
+      "Neutral": 3,
+      "Anxious": 2,
+      "Stressed": 1
+    };
+    const lastMood = logs && logs.length > 0 ? logs[logs.length - 1].mood : null;
+    const score = moodScores[lastMood] || 3;
+  %>
+
+  <% if (score >= 3) { %>
+    <ul>
+      <li>🚀 <a href="/video">Fuel your positivity with an uplifting video</a></li>
+    <li>⏳ <a href="/toolkits">Channel your energy using the Pomodoro timer</a></li>
+    <li>🖊️ <a href="/journal">Capture this vibe in your journal — future you will thank you</a></li>
+    </ul>
+  <% } else { %>
+    <ul>
+    <li>🌬️ <a href="/toolkits">Take a few calming breaths with our breathing tools</a></li>
+    <li>📝 <a href="/journal">Let it out — your journal is a safe space</a></li>
+    <li>💬 <a href="/support">You’re not alone — reach out through our support helpline</a></li>
+    </ul>
+  <% } %>
+</div>
+
+
+
   </main>
 
   <%- include('../partials/footer') %>
