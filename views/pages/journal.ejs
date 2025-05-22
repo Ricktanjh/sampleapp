@@ -34,7 +34,7 @@
     <h2 class="section-title">Previous Entries</h2>
     <% if (blogs && blogs.length > 0) { %>
       <% blogs.forEach(post => { %>
-        <article class="post-container">
+        <article class="card">
           <h3><%= post.title %></h3>
           <p><%= post.content %></p>
           <form action="/delete/<%= post.id %>" method="POST" onsubmit="return confirm('Do you really want to delete this post?');">
